@@ -24,6 +24,8 @@ class BitmapEditor
           create_image(input[2].to_i,input[4].to_i)
         when 'S'
           show_image
+        when 'C'
+          clear_image
         else
           puts 'unrecognised command :('
       end
@@ -60,6 +62,15 @@ class BitmapEditor
     def show_image
       @bitmap.each do |item|
         puts "#{item}"
+      end
+    end
+
+
+    def clear_image
+      @bitmap.each do |row|
+        row.each do |item|
+          item.replace('O')
+        end
       end
     end
 end
