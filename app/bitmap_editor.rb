@@ -1,3 +1,4 @@
+require_relative 'bitmap'
 class BitmapEditor
 
 
@@ -60,53 +61,31 @@ class BitmapEditor
 
 
     def create_image(columns, rows)
-      @bitmap = Array.new(rows) {Array.new(columns,'O')}
+      @bitmap = Bitmap.new(columns, rows)
     end
 
 
     def show_image
-      @bitmap.each do |row|
-        puts "#{row}"
-      end
+      @bitmap.show_bitmap
     end
 
 
     def clear_image
-      @bitmap.each do |row|
-        row.each do |col|
-          col.replace('O')
-        end
-      end
+      @bitmap.clear_bitmap
     end
 
 
     def draw_vertical_segment(in_column, from_row, to_row, color)
-      @bitmap.each_with_index do |row, row_index|        
-        if(row_index >= from_row && row_index <= to_row)
-          row.each_with_index do |col, col_index|
-            if(col_index == in_column)
-              @bitmap[row_index][col_index] = color
-            end
-          end
-        end
-      end
+      @bitmap.draw_vertical_line(in_column, from_row, to_row, color)
     end
 
 
     def draw_horizontal_segment(in_row, from_column, to_column, color)
-      @bitmap.each_with_index do |row, row_index|        
-        if(row_index == in_row)
-          row.each_with_index do |col, col_index|
-            if(col_index >= from_column && col_index <= to_column)
-              @bitmap[row_index][col_index] = color
-            end
-          end
-        end
-      end
+      bitmap.draw_horizontal_line(in_row, from_column, to_column, color)
     end
 
 
     def color_pixel(in_row, in_column, color)
-      @bitmap[in_row][in_column] = color
+      @bitmap.color_point(in_row, in_column, color)
     end
 end
