@@ -26,6 +26,10 @@ class BitmapEditor
           show_image
         when 'C'
           clear_image
+        when /^V\s\d\s\d\s\d\s[A-Z]/
+          draw_vertical_segment(input[2].to_i, input[4].to_i, input[6].to_i, input[8])
+        when /^H\s\d\s\d\s\d\s[A-Z]/
+          draw_horizontal_segment(input[2].to_i, input[4].to_i, input[6].to_i, input[8])
         else
           puts 'unrecognised command :('
       end
@@ -55,21 +59,47 @@ class BitmapEditor
 
     def create_image(columns, rows)
       @bitmap = Array.new(rows) {Array.new(columns,'O')}
-      #puts @bitmap.inspect
     end
 
 
     def show_image
-      @bitmap.each do |item|
-        puts "#{item}"
+      @bitmap.each do |row|
+        puts "#{row}"
       end
     end
 
 
     def clear_image
       @bitmap.each do |row|
-        row.each do |item|
-          item.replace('O')
+        row.each do |col|
+          col.replace('O')
+        end
+      end
+    end
+
+
+    def draw_vertical_segment(in_column, from_row, to_row, color)
+      @bitmap.each_with_index do |row, row_index|        
+        if(row_index >= from_row && row_index <= to_row)
+          row.each_with_index do |col, col_index|
+            if(col_index == in_column)
+              @bitmap[row_index][col_index] = color
+            end
+          end
+        end
+      end
+    end
+
+
+    def draw_horizontal_segment(in_row, from_column, to_column, color)
+      puts "draw_horizontal_segment"
+      @bitmap.each_with_index do |row, row_index|        
+        if(row_index == in_row)
+          row.each_with_index do |col, col_index|
+            if(col_index >= from_column && col_index <= to_column)
+              @bitmap[row_index][col_index] = color
+            end
+          end
         end
       end
     end
