@@ -1,8 +1,7 @@
 require_relative 'bitmap'
+
+
 class BitmapEditor
-
-
-  attr_accessor :bitmap
 
 
   def initialize
@@ -16,23 +15,24 @@ class BitmapEditor
     while @running
       print '> '
       input = gets.chomp
+      input_array = input.split(" ")
       case input
         when '?'
           show_help
         when 'X'
           exit_console
-        when /^I\s\d\s\d/
-          create_image(input[2].to_i,input[4].to_i)
+        when /^I\s\d{1,3}\s\d{1,3}/
+          create_image(input_array[1].to_i,input_array[2].to_i)
         when 'S'
           show_image
         when 'C'
           clear_image
-        when /^V\s\d\s\d\s\d\s[A-Z]/
-          draw_vertical_segment(input[2].to_i, input[4].to_i, input[6].to_i, input[8])
-        when /^H\s\d\s\d\s\d\s[A-Z]/
-          draw_horizontal_segment(input[2].to_i, input[4].to_i, input[6].to_i, input[8])
-        when /^L\s\d\s\d\s[A-Z]/
-          color_pixel(input[2].to_i, input[4].to_i, input[6])
+        when /^V\s\d{1,3}\s\d{1,3}\s\d{1,3}\s[A-Z]/
+          draw_vertical_segment(input_array[1].to_i, input_array[2].to_i, input_array[3].to_i, input_array[4])
+        when /^H\s\d{1,3}\s\d{1,3}\s\d{1,3}\s[A-Z]/
+          draw_horizontal_segment(input_array[1].to_i, input_array[2].to_i, input_array[3].to_i, input_array[4])
+        when /^L\s\d{1,3}\s\d{1,3}\s[A-Z]/
+          color_pixel(input_array[1].to_i, input_array[2].to_i, input_array[3])
         else
           puts 'unrecognised command :('
       end

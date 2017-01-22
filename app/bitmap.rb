@@ -2,7 +2,11 @@ class Bitmap
 
 
 	def initialize(columns, rows)
-    	@array = Array.new(rows) {Array.new(columns,'O')}
+	  if(columns >= 1 && columns <= 250 && rows >= 1 && rows <= 250)
+        @array = Array.new(rows) {Array.new(columns,'O')}
+      else
+        puts "Try again : columns and rows should be between 1 and 250 😉"
+      end
   	end
 
 
