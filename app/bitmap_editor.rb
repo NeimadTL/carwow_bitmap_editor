@@ -30,6 +30,8 @@ class BitmapEditor
           draw_vertical_segment(input[2].to_i, input[4].to_i, input[6].to_i, input[8])
         when /^H\s\d\s\d\s\d\s[A-Z]/
           draw_horizontal_segment(input[2].to_i, input[4].to_i, input[6].to_i, input[8])
+        when /^L\s\d\s\d\s[A-Z]/
+          color_pixel(input[2].to_i, input[4].to_i, input[6])
         else
           puts 'unrecognised command :('
       end
@@ -92,7 +94,6 @@ class BitmapEditor
 
 
     def draw_horizontal_segment(in_row, from_column, to_column, color)
-      puts "draw_horizontal_segment"
       @bitmap.each_with_index do |row, row_index|        
         if(row_index == in_row)
           row.each_with_index do |col, col_index|
@@ -102,5 +103,10 @@ class BitmapEditor
           end
         end
       end
+    end
+
+
+    def color_pixel(in_row, in_column, color)
+      @bitmap[in_row][in_column] = color
     end
 end
