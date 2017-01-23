@@ -2,7 +2,7 @@ class Bitmap
 
 
 	def initialize(columns, rows)
-	  if(columns >= 1 && columns <= 250 && rows >= 1 && rows <= 250)
+	  if columns >= 1 && columns <= 250 && rows >= 1 && rows <= 250
 	  	@columns = columns
 	  	@rows = rows
         @array = Array.new(rows) {Array.new(columns,'O')}
@@ -29,7 +29,7 @@ class Bitmap
 
 
   	def draw_vertical_line(in_x, from_y1, to_y2, color)
-  	  #if(from_y1 >= @rows && from_y1 <= @rows && to_y2 >= @rows && to_y2 <= @rows && in_x >= @columns && in_x <= @columns)
+  	  if in_x >= 1 && in_x <= @columns && from_y1 >= 1 && from_y1 <= @rows && to_y2 >= 1 && to_y2 <= @rows
   	    @array.each_with_index do |row, row_index|        
           if(row_index >= from_y1 && row_index <= to_y2)
             row.each_with_index do |col, col_index|
@@ -39,14 +39,14 @@ class Bitmap
             end
           end
         end
-   #    else
-   #    	puts "Try again : column X should be between 1 and #{@columns}; rows Y1 and Y2 should be between 1 and #{@rows} 😉"
-	  # end
+      else
+      	puts "Try again : column X should be between 1 and #{@columns}; rows Y1 and Y2 should be between 1 and #{@rows} 😉"
+	  end
   	end
 
 
   	def draw_horizontal_line(in_y, from_x1, to_x2, color)
-  	  #if(from_x1 >= @columns && from_x1 <= @columns && to_x2 >= @columns && to_x2 <= @columns && in_y >= @rows && in_y <= @rows)
+  	  if in_y >= 1 && in_y <= @rows && from_x1 >= 1 && from_x1 <= @columns && to_x2 >= 1 && to_x2 <= @columns
   	    @array.each_with_index do |row, row_index|        
           if(row_index == in_y)
             row.each_with_index do |col, col_index|
@@ -56,14 +56,18 @@ class Bitmap
             end
           end
         end
-      # else
-      # 	puts "Try again : row Y should be between 1 and #{@rows}; columns X1 and X2 should be between 1 and #{@columns} 😉"
-      # end
+      else
+        puts "Try again : row Y should be between 1 and #{@rows}; columns X1 and X2 should be between 1 and #{@columns} 😉"
+      end
   	end
 
 
   	def color_point(x, y, color)
-      @array[x][y] = color
+  	  if x >= 1 && x <= @columns && y >= 1 && y <= @rows
+      	@array[x][y] = color
+      else
+      	puts "Try again : X should be between 1 and #{@columns}; Y should be between 1 and #{@rows} 😉"
+      end
     end
 
 end
