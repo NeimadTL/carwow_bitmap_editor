@@ -63,7 +63,7 @@ class Bitmap
 
 
   	def color_point(in_x, in_y, color)
-  	  if x >= 1 && x <= @columns && y >= 1 && y <= @rows
+  	  if in_x >= 1 && in_x <= @columns && in_y >= 1 && in_y <= @rows
       	@array[in_y -1][in_x -1] = color
       else
       	puts "Try again : X should be between 1 and #{@columns}; Y should be between 1 and #{@rows} 😉"
