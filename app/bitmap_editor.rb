@@ -101,9 +101,9 @@ class BitmapEditor
     end
 
 
-    def color_pixel(in_row, in_column, color)
+    def color_pixel(in_column, in_row, color)
       if has_image_been_created?
-        @bitmap.color_point(in_row, in_column, color)
+        @bitmap.color_point(in_column, in_row, color)
       else
         puts "Try again : make sure to create an image first 😉"
       end

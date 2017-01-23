@@ -34,7 +34,7 @@ class Bitmap
           if(row_index >= from_y1 && row_index <= to_y2)
             row.each_with_index do |col, col_index|
               if(col_index == in_x)
-                @array[row_index][col_index] = color
+                @array[row_index - 1][col_index -1] = color
               end
             end
           end
@@ -51,7 +51,7 @@ class Bitmap
           if(row_index == in_y)
             row.each_with_index do |col, col_index|
               if(col_index >= from_x1 && col_index <= to_x2)
-                @array[row_index][col_index] = color
+                @array[row_index -1][col_index -1] = color
               end
             end
           end
@@ -62,9 +62,9 @@ class Bitmap
   	end
 
 
-  	def color_point(x, y, color)
+  	def color_point(in_x, in_y, color)
   	  if x >= 1 && x <= @columns && y >= 1 && y <= @rows
-      	@array[x][y] = color
+      	@array[in_y -1][in_x -1] = color
       else
       	puts "Try again : X should be between 1 and #{@columns}; Y should be between 1 and #{@rows} 😉"
       end
