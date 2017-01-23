@@ -66,26 +66,51 @@ class BitmapEditor
 
 
     def show_image
-      @bitmap.show_bitmap
+      if has_image_been_created?
+        @bitmap.show_bitmap
+      else
+        puts "Try again : make sure to create an image first 😉"
+      end
     end
 
 
     def clear_image
-      @bitmap.clear_bitmap
+      if has_image_been_created?
+        @bitmap.clear_bitmap
+      else
+        puts "Try again : make sure to create an image first 😉"
+      end
     end
 
 
     def draw_vertical_segment(in_column, from_row, to_row, color)
-      @bitmap.draw_vertical_line(in_column, from_row, to_row, color)
+      if has_image_been_created?
+        @bitmap.draw_vertical_line(in_column, from_row, to_row, color)
+      else
+        puts "Try again : make sure to create an image first 😉"
+      end
     end
 
 
     def draw_horizontal_segment(in_row, from_column, to_column, color)
-      bitmap.draw_horizontal_line(in_row, from_column, to_column, color)
+      if has_image_been_created?
+        @bitmap.draw_horizontal_line(in_row, from_column, to_column, color)
+      else
+        puts "Try again : make sure to create an image first 😉"
+      end
     end
 
 
     def color_pixel(in_row, in_column, color)
-      @bitmap.color_point(in_row, in_column, color)
+      if has_image_been_created?
+        @bitmap.color_point(in_row, in_column, color)
+      else
+        puts "Try again : make sure to create an image first 😉"
+      end
+    end
+
+
+    def has_image_been_created?
+      @bitmap ? true : false
     end
 end
