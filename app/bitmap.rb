@@ -1,6 +1,10 @@
 class Bitmap
 
 
+	attr_reader :columns
+	attr_reader :rows
+
+
 	def initialize(columns, rows)
 	  if columns >= 1 && columns <= 250 && rows >= 1 && rows <= 250
 	  	@columns = columns
