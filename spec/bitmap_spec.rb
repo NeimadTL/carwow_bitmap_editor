@@ -86,8 +86,8 @@ RSpec.describe Bitmap do
 
     context "when draw_vertical_line is called with wrong parameters" do
       subject do 
-      	bitmap = Bitmap.new(0, 0)
-      	bitmap.draw_vertical_line(7, 1, 6, 'A') # in column 7
+      	bitmap = Bitmap.new(6, 6)
+      	bitmap.draw_vertical_line(7, 1, 6, 'A') # in column 7 which doesn't exist
       	bitmap
       end 
     end
@@ -106,9 +106,47 @@ RSpec.describe Bitmap do
       	bitmap.draw_vertical_line(3, 1, 6, 'A')
       	bitmap
       end 
-      it "should draw a vertical segement accord to the parameters" do
+      it "should draw a vertical segement according to the parameters" do
         subject.array.each_with_index do |row, row_index|        
             expect(subject.array[row_index][2]).to include('A')
+        end
+      end
+    end
+  end
+
+
+
+
+  describe "#draw_horizontal_line" do
+    before { subject }
+
+    context "when draw_horizontal_line is called with wrong parameters" do
+      subject do 
+      	bitmap = Bitmap.new(2, 2)
+      	bitmap.draw_horizontal_line(3, 1, 6, 'A') # in row 3 which doesn't exist
+      	bitmap
+      end 
+    end
+    it "shouldn't draw anything" do
+      subject.array.each_with_index do |row, row_index|        
+        row.each_with_index do |col, col_index|
+          expect(subject.array[row_index][col_index]).to include('O')
+        end
+      end
+    end
+
+
+    context "when draw_horizontal_line is called with good parameters" do
+      subject do 
+      	bitmap = Bitmap.new(3, 2)
+      	bitmap.draw_horizontal_line(2, 1, 3, 'A')
+      	bitmap
+      end 
+      it "should draw a horizontal segement according to the parameters" do
+        subject.array.each_with_index do |row| 
+          row.each_with_index do |col, col_index|       
+            expect(subject.array[1][col_index]).to include('A')
+          end
         end
       end
     end
