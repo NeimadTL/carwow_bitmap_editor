@@ -56,4 +56,29 @@ RSpec.describe Bitmap do
     end
   end
 
+
+  describe "#clear_bitmap" do
+    before { subject }
+
+    context "when clear_bitmap is called" do
+      subject do 
+      	bitmap = Bitmap.new(6, 2)
+      	bitmap.color_point(1,1, 'A')
+      	bitmap.color_point(1,2, 'B')
+      	bitmap.color_point(6,1, 'C')
+      	bitmap.color_point(6,2, 'D')
+      	bitmap.clear_bitmap
+      	bitmap
+      end 
+      it "should reset bitmap with the white color (O)" do
+        subject.array.each_with_index do |row, row_index|        
+          row.each_with_index do |col, col_index|
+            expect(subject.array[row_index][col_index]).to include('O')
+          end
+        end
+      end
+    end
+  end
+   
+
 end
