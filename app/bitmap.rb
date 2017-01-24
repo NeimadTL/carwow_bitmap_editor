@@ -3,6 +3,7 @@ class Bitmap
 
 	attr_reader :columns
 	attr_reader :rows
+	attr_reader :array
 
 
 	def initialize(columns, rows)

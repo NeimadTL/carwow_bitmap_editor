@@ -34,4 +34,26 @@ RSpec.describe Bitmap do
     end
   end
 
+
+  describe "#color_point" do
+    before { subject }
+
+    context "when color_point is called" do
+      subject do 
+      	bitmap = Bitmap.new(6, 2)
+      	bitmap.color_point(1,1, 'A')
+      	bitmap.color_point(1,2, 'B')
+      	bitmap.color_point(6,1, 'C')
+      	bitmap.color_point(6,2, 'D')
+      	bitmap
+      end 
+      it "should color the point passed with the color passed" do
+        expect(subject.array[0][0]).to include('A')
+        expect(subject.array[1][0]).to include('B')
+        expect(subject.array[0][5]).to include('C')
+        expect(subject.array[1][5]).to include('D')
+      end
+    end
+  end
+
 end
